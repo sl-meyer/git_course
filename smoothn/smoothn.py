@@ -75,13 +75,14 @@ def smoothn(y, s=None, tolz=1e-3, z0=None, w=None, di=None,
 
     # Create weights matrix
     if w is None:
-        w = np.ones(shape) * np.random.rand(*shape)
-    w = w/np.max(w) * ~y.mask
+        w = np.random.rand(*shape)
+    w = w * ~y.mask * np.random.rand(*shape)
+
     if np.any(w < 0):
         raise ValueError('All weights must be >=0')
 
     # Define if it has a weight matrix and if the smoothing factor needs to be calculated
-    isweight = np.any(w < 1)
+    isweight = np.any(w != 1)
     isauto = s is None
 
     # Create Lambda tensor (see reference) and calculate Gamma if S is given

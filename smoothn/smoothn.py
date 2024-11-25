@@ -14,6 +14,7 @@ from scipy.ndimage.morphology import distance_transform_edt
 
 
 # ================================================================================================
+
 def smoothn(y, s=None, tolz=1e-3, z0=None, w=None, di=None,
             robust=False, max_iter=1000, robust_iter=3, workers=1,
             return_s=False):
@@ -74,7 +75,7 @@ def smoothn(y, s=None, tolz=1e-3, z0=None, w=None, di=None,
 
     # Create weights matrix
     if w is None:
-        w = np.ones(shape)
+        w = np.ones(shape) * np.random.rand(*shape)
     w = w/np.max(w) * ~y.mask
     if np.any(w < 0):
         raise ValueError('All weights must be >=0')
@@ -151,6 +152,7 @@ def smoothn(y, s=None, tolz=1e-3, z0=None, w=None, di=None,
 
 
 # ================================================================================================
+
 def gcv_score(s, y, w_tot, n, nf, dcty, lamb, aow=None):
     """
     Calculates the Generalised Cross-Validation (GCV) score based on the weights assigned to the data.
@@ -202,6 +204,7 @@ def gcv_score(s, y, w_tot, n, nf, dcty, lamb, aow=None):
 
 
 # ================================================================================================
+
 def to_masked(y):
     """
     Converts an input array into a masked array with NaN values masked.
@@ -222,6 +225,7 @@ def to_masked(y):
 
 
 # ================================================================================================
+
 def create_lambda(y, dx):
     """
     Creates a Lambda tensor for the `smoothn` function. It contains the eigenvalues of the difference matrix used in
@@ -254,6 +258,7 @@ def create_lambda(y, dx):
 
 
 # ================================================================================================
+
 def initz(y):
     """
     Initialize the estimation values of y using nearest interpolation. Implemented for 1D, 2D and 3D.
@@ -286,6 +291,7 @@ def initz(y):
 
 
 # ================================================================================================
+
 def studentized_residuals(y, z, mask, s):
     """
     Calculate the Studentized residuals of the approximation using the median absolute deviation and diagonal
@@ -324,6 +330,7 @@ def studentized_residuals(y, z, mask, s):
 
 
 # ================================================================================================
+
 def biweight(u, c=4.685):
     """
     Calculate the bisquare weighting of the residuals.

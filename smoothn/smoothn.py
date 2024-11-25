@@ -75,7 +75,7 @@ def smoothn(y, s=None, tolz=1e-3, z0=None, w=None, di=None,
 
     # Create weights matrix
     if w is None:
-        w = np.ones(shape) * np.random.rand(*shape)
+        w = np.ones(shape)
     w = w/np.max(w) * ~y.mask
     if np.any(w < 0):
         raise ValueError('All weights must be >=0')

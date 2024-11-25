@@ -7,9 +7,9 @@
    - Tools to use:
      - GitHub, GitLab
      - Local clients:
-       - TortoiseGit
        - Git Bash
        - Git terminal
+       - TortoiseGit
 
 2. **Sources and Resources**
    - Accessing repositories on platforms like GitHub and GitLab

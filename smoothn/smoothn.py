@@ -16,7 +16,7 @@ from scipy.ndimage.morphology import distance_transform_edt
 # ================================================================================================
 
 def smoothn(y, s=None, tolz=1e-3, z0=None, w=None, di=None,
-            robust=False, max_iter=1000, robust_iter=3, workers=1,
+            robust=False, max_iter=1000, robust_iter=2, workers=1,
             return_s=False):
     """
     Fast smooths an array of data based on the cosine discrete transform. Allows to choose the smoothing parameter,
@@ -109,7 +109,8 @@ def smoothn(y, s=None, tolz=1e-3, z0=None, w=None, di=None,
 
     z0 = z
 
-    y_fill = y.filled(0.0)  # Assign arbitrary value to missing data
+    y_fill = y  # Assign value to missing data
+    y_fill[y_fill.mask] = z0[y_fill.mask]
 
     # ===== START ITERATIONS =====
 

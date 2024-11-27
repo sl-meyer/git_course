@@ -67,3 +67,7 @@ def inpaintn(data, s=None, structure=None, max_size=None,  robust=False, **kwarg
     else:
         z[mask_clean] = smoothn(data, s=s, robust=robust, **kwargs)[mask_clean]
         return z
+
+def print_cool():
+    print('This is cool')
+
